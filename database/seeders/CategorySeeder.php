@@ -1,17 +1,23 @@
 <?php
-
+// database/seeders/CategorySeeder.php
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        $categories = [
+            ['category_name' => 'Document Services', 'description' => 'Barangay document requests'],
+            ['category_name' => 'Permits', 'description' => 'Business and construction permits'],
+            ['category_name' => 'Clearance', 'description' => 'Various clearance certificates'],
+            ['category_name' => 'Assistance', 'description' => 'Financial and medical assistance'],
+        ];
+
+        foreach ($categories as $category) {
+            Category::create($category);
+        }
     }
 }

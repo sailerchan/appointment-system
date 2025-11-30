@@ -13,7 +13,11 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             PositionSeeder::class,
             CategorySeeder::class,
+            ServiceSeeder::class,
             UserSeeder::class,
+            ResidentSeeder::class,
+            TimeSlotSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }
