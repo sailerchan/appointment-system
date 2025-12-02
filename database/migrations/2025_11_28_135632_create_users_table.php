@@ -13,9 +13,9 @@ return new class extends Migration {
             $table->string('password_hash');
             $table->string('full_name');
             $table->string('phone_number');
-            $table->foreignId('role_id')->constrained('roles');
-            $table->foreignId('position_id')->nullable()->constrained('positions');
-            $table->foreignId('status_id')->constrained('status');
+            $table->foreignId('role_id')->references('role_id')->on('roles')->onDelete('cascade');
+            $table->foreignId('position_id')->references('position_id')->on('positions')->onDelete('cascade');
+            $table->foreignId('status_id')->references('status_id')->on('status')->onDelete('cascade');
             $table->timestamp('last_login_at')->nullable();
             $table->timestamps();
         });

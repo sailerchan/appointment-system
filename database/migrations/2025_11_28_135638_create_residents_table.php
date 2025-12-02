@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('residents', function (Blueprint $table) {
             $table->id('resident_id');
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('full_name');
+            $table->foreignId('timestop_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');
+            $table->foreignId('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->string('email_address');
             $table->string('phone_number');
             $table->timestamps();

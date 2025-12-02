@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('services', function (Blueprint $table) {
             $table->id('service_id');
             $table->string('service_name');
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->on('categories');
             $table->timestamps();
         });
     }

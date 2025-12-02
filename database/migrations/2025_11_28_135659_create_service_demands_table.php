@@ -9,7 +9,8 @@ return new class extends Migration {
     {
         Schema::create('service_demands', function (Blueprint $table) {
             $table->id('demand_id');
-            $table->foreignId('service_id')->constrained('services');
+            $table->foreignId('service_id')->references('service_id')->on('services')->onDelete('cascade');
+    
             $table->integer('request_count');
             $table->decimal('percentage', 5, 2);
             $table->integer('ranking');

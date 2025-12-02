@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id('notification_id');
-            $table->foreignId('resident_id')->constrained('residents');
-            $table->foreignId('appointment_id')->constrained('appointments');
+            $table->foreignId('resident_id')->references('resident_id')->on('residents')->onDelete('cascade');
+            $table->foreignId('appointment_id')->references('appointment_id')->on('appointments')->onDelete('cascade');
             $table->text('message');
             $table->timestamp('sent_at');
             $table->boolean('is_read')->default(false);

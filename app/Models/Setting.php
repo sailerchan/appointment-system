@@ -13,7 +13,7 @@ class Setting extends Model
     protected $fillable = [
         'barangay_name',
         'barangay_address',
-        'barangay_agtain',
+        'barangay_captain',
         'contact_number',
         'office_hour_start',
         'office_hours_end',

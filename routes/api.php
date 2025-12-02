@@ -1,6 +1,9 @@
 <?php
 // routes/api.php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Api\CompanyController;
+
 
 // =====================
 // SUPER SIMPLE TEST ROUTES

@@ -1,7 +1,12 @@
 <?php
-// routes/web.php
 use Illuminate\Support\Facades\Route;
 
+// Homepage/root route
+Route::get('/', function () {
+    return "Welcome to Laravel! Homepage is working.";
+});
+
+// Your existing routes
 Route::get('/test-web', function () {
     return "WEB ROUTE IS WORKING!";
 });

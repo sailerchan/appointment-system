@@ -8,18 +8,30 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->id('appointment_id');
-            $table->foreignId('resident_id')->constrained('residents');
-            $table->foreignId('service_id')->constrained('services');
-            $table->foreignId('administrator_id')->constrained('users');
-            $table->foreignId('timestop_id')->constrained('time_slots');
-            $table->foreignId('status_id')->constrained('status');
+            $table->id('appointment_id'); // Remove ->primary(), id() already sets it as primary
+
+            // Foreign keys
+            $table->foreignId('resident_id')->references('resident_id')->on('residents')->onDelete('cascade');
+            $table->foreignId('service_id')->references('service_id')->on('services')->onDelete('cascade');
+            $table->foreignId('role_id')->references('role_id')->on('roles')->onDelete('cascade');
+            $table->foreignId('timeslot_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');
+            $table->foreignId('status_id')->references('status_id')->on('status')->onDelete('cascade');
+
+            // REMOVED this line - you cannot reference the same table during creation
+            // $table->foreignId('appointment_id')->references('appointment_id')->on('appointments')->onDelete('cascade');
+
+            // Appointment details
             $table->date('appointment_date');
             $table->time('appointment_time');
             $table->integer('duration_minutes');
             $table->text('purpose_notes');
             $table->string('reference_no')->unique();
+
             $table->timestamps();
+
+            // Optional: Add indexes
+            $table->index('appointment_date');
+            $table->index('reference_no');
         });
     }
 
