@@ -1,16 +1,19 @@
 <?php
-// database/migrations/2024_01_08_create_residents_table.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('residents', function (Blueprint $table) {
-            $table->id('resident_id');
-            $table->foreignId('timestop_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');
-            $table->foreignId('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            // DON'T use: $table->id('resident_id');
+            // INSTEAD use:
+            $table->bigIncrements('resident_id'); // This creates resident_id as auto-increment PK
+
+            $table->unsignedBigInteger('user_id');
+            $table->string('full_name');
             $table->string('email_address');
             $table->string('phone_number');
             $table->timestamps();

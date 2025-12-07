@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class AppointmentController extends Controller
 {
-        public function index(): JsonResponse
+    public function index(): JsonResponse
     {
         $appointments = Appointment::with(['resident', 'service', 'administrator', 'timeSlot', 'status'])
             ->get();
@@ -26,7 +26,7 @@ class AppointmentController extends Controller
             'resident_id' => 'required|exists:residents,resident_id',
             'service_id' => 'required|exists:services,service_id',
             'administrator_id' => 'required|exists:users,user_id',
-            'timestop_id' => 'required|exists:time_slots,timestop_id',
+            'time_slot_id' => 'required|exists:time_slots,time_slot_id', // Fixed
             'status_id' => 'required|exists:status,status_id',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|date_format:H:i',
@@ -58,7 +58,7 @@ class AppointmentController extends Controller
             'resident_id' => 'sometimes|exists:residents,resident_id',
             'service_id' => 'sometimes|exists:services,service_id',
             'administrator_id' => 'sometimes|exists:users,user_id',
-            'timestop_id' => 'sometimes|exists:time_slots,timestop_id',
+            'time_slot_id' => 'sometimes|exists:time_slots,time_slot_id', // Fixed
             'status_id' => 'sometimes|exists:status,status_id',
             'appointment_date' => 'sometimes|date',
             'appointment_time' => 'sometimes|date_format:H:i',
@@ -83,6 +83,19 @@ class AppointmentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Appointment deleted successfully'
+        ]);
+    }
+
+    // ADD THIS MISSING METHOD
+    public function showByReference($reference_no): JsonResponse
+    {
+        $appointment = Appointment::with(['resident', 'service', 'administrator', 'timeSlot', 'status'])
+            ->where('reference_no', $reference_no)
+            ->firstOrFail();
+
+        return response()->json([
+            'success' => true,
+            'data' => $appointment
         ]);
     }
 

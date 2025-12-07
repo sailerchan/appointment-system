@@ -10,9 +10,19 @@ class ResidentSeeder extends Seeder
 {
     public function run(): void
     {
+        // Clear existing residents first
+        Resident::truncate();
+
+        // Get existing users with Resident role (capital R)
         $residentUsers = User::whereHas('role', function($query) {
-            $query->where('role_name', 'resident');
+            $query->where('role_name', 'Resident'); // Capital R
         })->get();
+
+        // Check if we have enough users
+        if ($residentUsers->count() < 4) {
+            echo "Warning: Not enough resident users found.\n";
+            return;
+        }
 
         $residents = [
             [
@@ -44,5 +54,7 @@ class ResidentSeeder extends Seeder
         foreach ($residents as $resident) {
             Resident::create($resident);
         }
+
+        echo "Created " . count($residents) . " residents.\n";
     }
 }

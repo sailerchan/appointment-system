@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id('appointment_id'); // Remove ->primary(), id() already sets it as primary
 
             // Foreign keys
-            $table->foreignId('resident_id')->references('resident_id')->on('residents')->onDelete('cascade');
+            $table->unsignedBigInteger('resident_id');
             $table->foreignId('service_id')->references('service_id')->on('services')->onDelete('cascade');
             $table->foreignId('role_id')->references('role_id')->on('roles')->onDelete('cascade');
             $table->foreignId('timeslot_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');

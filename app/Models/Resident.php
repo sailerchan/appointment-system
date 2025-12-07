@@ -19,7 +19,7 @@ class Resident extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     public function appointments()
@@ -32,3 +32,4 @@ class Resident extends Model
         return $this->hasMany(Notification::class, 'resident_id');
     }
 }
+

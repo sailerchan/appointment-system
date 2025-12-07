@@ -74,4 +74,17 @@ class TimeSlotController extends Controller
             'message' => 'Time slot deleted successfully'
         ]);
     }
+    public function getAvailableSlots(): JsonResponse
+{
+    $availableSlots = TimeSlot::where('available_slots', '>', 0)
+        ->where('slot_date', '>=', now()->toDateString()) // Future slots only
+        ->orderBy('slot_date')
+        ->orderBy('start_time')
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $availableSlots
+    ]);
+}
 }
