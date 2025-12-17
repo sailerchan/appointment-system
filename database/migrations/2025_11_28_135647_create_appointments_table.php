@@ -13,7 +13,7 @@ return new class extends Migration {
             // Foreign keys
             $table->unsignedBigInteger('resident_id');
             $table->foreignId('service_id')->references('service_id')->on('services')->onDelete('cascade');
-            $table->foreignId('role_id')->references('role_id')->on('roles')->onDelete('cascade');
+            // $table->foreignId('role_id')->references('role_id')->on('roles')->onDelete('cascade');
             $table->foreignId('timeslot_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');
             $table->foreignId('status_id')->references('status_id')->on('status')->onDelete('cascade');
 

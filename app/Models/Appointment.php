@@ -14,7 +14,7 @@ class Appointment extends Model
     protected $fillable = [
         'resident_id',
         'service_id',
-        'role_id',          // ← CHANGE THIS LINE
+        // 'role_id',          // ← CHANGE THIS LINE
         'timeslot_id',      // ← CHANGE THIS LINE
         'status_id',
         'appointment_date',
@@ -36,16 +36,16 @@ class Appointment extends Model
         return $this->belongsTo(Service::class, 'service_id', 'service_id');
     }
 
-    public function role()  // CHANGED: administrator() → role()
-    {
-        // Links to roles.role_id (not users.user_id)
-        return $this->belongsTo(Role::class, 'role_id', 'role_id');
-    }
+    // public function role()  // CHANGED: administrator() → role()
+    // {
+    //     // Links to roles.role_id (not users.user_id)
+    //     return $this->belongsTo(Role::class, 'role_id', 'role_id');
+    // }
 
-    public function timeSlot()  // Already correct name
+    public function timeSlot()
     {
 
-       return $this->belongsTo(TimeSlot::class, 'timeslot_id', 'timestop_id');
+       return $this->belongsTo(TimeSlot::class, 'timeslot_id', 'timeslot_id');
     }
 
     public function status()
