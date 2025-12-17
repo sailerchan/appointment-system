@@ -11,16 +11,10 @@ class Resident extends Model
 
     protected $primaryKey = 'resident_id';
     protected $fillable = [
-        'user_id',
         'full_name',
         'email_address',
         'phone_number'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'user_id');
-    }
 
     public function appointments()
     {

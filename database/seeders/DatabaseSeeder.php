@@ -7,17 +7,19 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
-   {
-    $this->call([
-        StatusSeeder::class,    // #1 - Creates statuses for users & appointments
-        RoleSeeder::class,      // #2 - Creates admin, staff, resident roles
-        PositionSeeder::class,  // #3 - Creates barangay positions
-        CategorySeeder::class,  // #4 - Creates service categories
-        ServiceSeeder::class,   // #5 - Creates services (needs categories)
-        SettingSeeder::class,   // #6 - Creates barangay settings
-        UserSeeder::class,      // #7 - Creates users (needs roles, positions, status)
-        ResidentSeeder::class,  // #8 - Creates residents (needs users)
-        TimeSlotSeeder::class,  // #9 - Creates time slots for appointments
-    ]);
-}
+    {
+        $this->call([
+            StatusSeeder::class,    // #1 - Independent
+            RoleSeeder::class,      // #2 - Independent
+            PositionSeeder::class,  // #3 - Independent
+            CategorySeeder::class,  // #4 - Independent
+            ServiceSeeder::class,   // #5 - Needs categories
+            SettingSeeder::class,   // #6 - Independent
+            // UserSeeder AFTER RoleSeeder & PositionSeeder
+            UserSeeder::class,      // #7 - Needs roles & positions
+            // ResidentSeeder AFTER UserSeeder (and BEFORE TimeSlotSeeder)
+            ResidentSeeder::class,  // #8 - Needs users
+            TimeSlotSeeder::class,  // #9 - Independent
+        ]);
+    }
 }

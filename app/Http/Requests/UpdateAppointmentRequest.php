@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // app/Http/Requests/UpdateAppointmentRequest.php
 namespace App\Http\Requests;
 
@@ -16,7 +16,7 @@ class UpdateAppointmentRequest extends FormRequest
         return [
             'resident_id' => 'sometimes|exists:residents,resident_id',
             'service_id' => 'sometimes|exists:services,service_id',
-            'administrator_id' => 'sometimes|exists:users,user_id',
+            'role_id' => 'sometimes|exists:users,user_id',
             'timestop_id' => 'sometimes|exists:time_slots,timestop_id',
             'status_id' => 'sometimes|exists:status,status_id',
             'appointment_date' => 'sometimes|date|after_or_equal:today',
@@ -27,3 +27,4 @@ class UpdateAppointmentRequest extends FormRequest
         ];
     }
 }
+

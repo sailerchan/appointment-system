@@ -14,3 +14,7 @@ Route::get('/test-web', function () {
 Route::get('/test-api-from-web', function () {
     return "This is a web route that mimics API";
 });
+
+Route::get('/appointments', function () {
+    return view('appointments.index');
+});

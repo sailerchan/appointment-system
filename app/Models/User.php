@@ -38,11 +38,6 @@ class User extends Model
         return $this->belongsTo(Status::class, 'status_id');
     }
 
-    public function resident()
-    {
-        return $this->hasOne(Resident::class, 'user_id');
-    }
-
     public function administratorAppointments()
     {
         return $this->hasMany(Appointment::class, 'administrator_id');

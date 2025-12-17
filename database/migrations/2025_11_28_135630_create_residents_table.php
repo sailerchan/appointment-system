@@ -12,7 +12,6 @@ return new class extends Migration
             // INSTEAD use:
             $table->bigIncrements('resident_id'); // This creates resident_id as auto-increment PK
 
-            $table->unsignedBigInteger('user_id');
             $table->string('full_name');
             $table->string('email_address');
             $table->string('phone_number');

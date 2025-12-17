@@ -10,11 +10,12 @@ class Appointment extends Model
     use HasFactory;
 
     protected $primaryKey = 'appointment_id';
+
     protected $fillable = [
         'resident_id',
         'service_id',
-        'administrator_id',
-        'timestop_id',
+        'role_id',          // ← CHANGE THIS LINE
+        'timeslot_id',      // ← CHANGE THIS LINE
         'status_id',
         'appointment_date',
         'appointment_time',
@@ -25,31 +26,36 @@ class Appointment extends Model
 
     public function resident()
     {
-        return $this->belongsTo(Resident::class, 'resident_id');
+
+        return $this->belongsTo(Resident::class, 'resident_id', 'resident_id');
     }
 
     public function service()
     {
-        return $this->belongsTo(Service::class, 'service_id');
+        // Specify custom foreign key since services table uses service_id
+        return $this->belongsTo(Service::class, 'service_id', 'service_id');
     }
 
-    public function administrator()
+    public function role()  // CHANGED: administrator() → role()
     {
-        return $this->belongsTo(User::class, 'administrator_id');
+        // Links to roles.role_id (not users.user_id)
+        return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
 
-    public function timeSlot()
+    public function timeSlot()  // Already correct name
     {
-        return $this->belongsTo(TimeSlot::class, 'timestop_id');
+
+       return $this->belongsTo(TimeSlot::class, 'timeslot_id', 'timestop_id');
     }
 
     public function status()
     {
-        return $this->belongsTo(Status::class, 'status_id');
+        // Specify custom foreign key since status table uses status_id
+        return $this->belongsTo(Status::class, 'status_id', 'status_id');
     }
 
     public function notifications()
     {
-        return $this->hasMany(Notification::class, 'appointment_id');
+        return $this->hasMany(Notification::class, 'appointment_id', 'appointment_id');
     }
 }

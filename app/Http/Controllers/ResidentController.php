@@ -10,7 +10,7 @@ class ResidentController extends Controller
 {
     public function index(): JsonResponse
     {
-        $residents = Resident::with(['user', 'appointments'])
+        $residents = Resident::with(['appointments'])
             ->get();
 
         return response()->json([
@@ -22,7 +22,6 @@ class ResidentController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,user_id',
             'full_name' => 'required|string|max:255',
             'email_address' => 'required|email',
             'phone_number' => 'required|string|max:20'
@@ -33,7 +32,7 @@ class ResidentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Resident created successfully',
-            'data' => $resident->load(['user'])
+            'data' => $resident
         ], 201);
     }
 
@@ -41,14 +40,13 @@ class ResidentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => $resident->load(['user', 'appointments'])
+            'data' => $resident->load(['appointments'])
         ]);
     }
 
     public function update(Request $request, Resident $resident): JsonResponse
     {
         $validated = $request->validate([
-            'user_id' => 'sometimes|exists:users,user_id',
             'full_name' => 'sometimes|string|max:255',
             'email_address' => 'sometimes|email',
             'phone_number' => 'sometimes|string|max:20'
@@ -59,7 +57,7 @@ class ResidentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Resident updated successfully',
-            'data' => $resident->load(['user'])
+            'data' => $resident
         ]);
     }
 

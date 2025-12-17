@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -11,7 +11,7 @@ class AppointmentController extends Controller
 {
     public function index(): JsonResponse
     {
-        $appointments = Appointment::with(['resident', 'service', 'administrator', 'timeSlot', 'status'])
+        $appointments = Appointment::with(['resident', 'service', 'role', 'timeSlot', 'status'])
             ->get();
 
         return response()->json([
@@ -25,7 +25,7 @@ class AppointmentController extends Controller
         $validated = $request->validate([
             'resident_id' => 'required|exists:residents,resident_id',
             'service_id' => 'required|exists:services,service_id',
-            'administrator_id' => 'required|exists:users,user_id',
+            'role_id' => 'required|exists:users,user_id',
             'time_slot_id' => 'required|exists:time_slots,time_slot_id', // Fixed
             'status_id' => 'required|exists:status,status_id',
             'appointment_date' => 'required|date',
@@ -40,7 +40,7 @@ class AppointmentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Appointment created successfully',
-            'data' => $appointment->load(['resident', 'service', 'administrator', 'timeSlot', 'status'])
+            'data' => $appointment->load(['resident', 'service', 'role', 'timeSlot', 'status'])
         ], 201);
     }
 
@@ -48,7 +48,7 @@ class AppointmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'data' => $appointment->load(['resident', 'service', 'administrator', 'timeSlot', 'status'])
+            'data' => $appointment->load(['resident', 'service', 'role', 'timeSlot', 'status'])
         ]);
     }
 
@@ -57,7 +57,7 @@ class AppointmentController extends Controller
         $validated = $request->validate([
             'resident_id' => 'sometimes|exists:residents,resident_id',
             'service_id' => 'sometimes|exists:services,service_id',
-            'administrator_id' => 'sometimes|exists:users,user_id',
+            'role_id' => 'sometimes|exists:users,user_id',
             'time_slot_id' => 'sometimes|exists:time_slots,time_slot_id', // Fixed
             'status_id' => 'sometimes|exists:status,status_id',
             'appointment_date' => 'sometimes|date',
@@ -72,7 +72,7 @@ class AppointmentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Appointment updated successfully',
-            'data' => $appointment->load(['resident', 'service', 'administrator', 'timeSlot', 'status'])
+            'data' => $appointment->load(['resident', 'service', 'role', 'timeSlot', 'status'])
         ]);
     }
 
@@ -89,7 +89,7 @@ class AppointmentController extends Controller
     // ADD THIS MISSING METHOD
     public function showByReference($reference_no): JsonResponse
     {
-        $appointment = Appointment::with(['resident', 'service', 'administrator', 'timeSlot', 'status'])
+        $appointment = Appointment::with(['resident', 'service', 'role', 'timeSlot', 'status'])
             ->where('reference_no', $reference_no)
             ->firstOrFail();
 
