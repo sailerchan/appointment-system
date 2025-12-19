@@ -63,7 +63,6 @@ class AppointmentController extends Controller
         $validated = $request->validate([
             'resident_id' => 'sometimes|exists:residents,resident_id',
             'service_id' => 'sometimes|exists:services,service_id',
-            // 'role_id' => 'sometimes|exists:roles,role_id',
             'timeslot_id' => 'sometimes|exists:time_slots,timestop_id', // ⚠️ FIXED
             'status_id' => 'sometimes|exists:status,status_id',
             'appointment_date' => 'sometimes|date',
