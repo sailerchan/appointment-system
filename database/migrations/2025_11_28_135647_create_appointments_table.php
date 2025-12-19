@@ -17,8 +17,6 @@ return new class extends Migration {
             $table->foreignId('status_id')->references('status_id')->on('status')->onDelete('cascade');
 
             // Appointment details
-            $table->date('appointment_date');
-            $table->time('appointment_time');
             $table->text('purpose_notes')->nullable();;
             $table->string('reference_no')->unique();
 

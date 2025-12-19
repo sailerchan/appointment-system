@@ -32,8 +32,6 @@ class AppointmentController extends Controller
             'service_id' => 'required|exists:services,service_id',
             'timeslot_id' => 'required|exists:time_slots,timeslot_id',
             'status_id' => 'nullable||exists:status,status_id',
-            'appointment_date' => 'required|date',
-            'appointment_time' => 'required|date_format:H:i',
             'purpose_notes' => 'sometimes|nullable|string|max:500',
         ]);
 
