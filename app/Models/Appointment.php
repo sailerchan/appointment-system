@@ -40,15 +40,8 @@ class Appointment extends Model
 
     public function service()
     {
-        // Specify custom foreign key since services table uses service_id
         return $this->belongsTo(Service::class, 'service_id', 'service_id');
     }
-
-    // public function role()  // CHANGED: administrator() → role()
-    // {
-    //     // Links to roles.role_id (not users.user_id)
-    //     return $this->belongsTo(Role::class, 'role_id', 'role_id');
-    // }
 
     public function timeSlot()
     {
