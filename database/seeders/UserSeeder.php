@@ -21,10 +21,10 @@ class UserSeeder extends Seeder
                               ->where('status_type', 'user')
                               ->first();
 
-        $secretaryPosition = Position::where('position_name', 'Barangay Secretary')->first();
-        $captainPosition = Position::where('position_name', 'Barangay Captain')->first();
+        $secretaryPosition = Position::where('position_name', 'Secretary')->first();
+        $captainPosition = Position::where('position_name', 'Captain')->first();
         $clerkPosition = Position::where('position_name', 'Clerk')->first();
-        $treasurerPosition = Position::where('position_name', 'Barangay Treasurer')->first();
+        $treasurerPosition = Position::where('position_name', 'Treasurer')->first();
 
         $users = [
             // Admin users
