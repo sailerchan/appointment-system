@@ -104,14 +104,14 @@ Route::get('/health-check', function () {
 Route::get('/check-providers', function () {
     $providers = config('app.providers', []);
     $hasBroadcast = false;
-    
+
     foreach ($providers as $provider) {
         if (str_contains($provider, 'Broadcast')) {
             $hasBroadcast = true;
             break;
         }
     }
-    
+
     return response()->json([
         'message' => 'Providers check route is working!',
         'total_providers' => count($providers),

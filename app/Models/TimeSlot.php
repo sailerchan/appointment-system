@@ -9,7 +9,7 @@ class TimeSlot extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'timestop_id';
+    protected $primaryKey = 'timeslot_id';
     protected $fillable = [
         'slot_date',
         'start_time',
@@ -20,6 +20,6 @@ class TimeSlot extends Model
 
     public function appointments()
     {
-        return $this->hasMany(Appointment::class, 'timestop_id');
+        return $this->hasMany(Appointment::class, 'timeslot_id');
     }
 }
