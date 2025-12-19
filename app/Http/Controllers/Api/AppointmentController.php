@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -25,14 +25,12 @@ class AppointmentController extends Controller
         $validated = $request->validate([
             'resident_id' => 'required|exists:residents,resident_id',
             'service_id' => 'required|exists:services,service_id',
-            'role_id' => 'required|exists:users,user_id',
             'time_slot_id' => 'required|exists:time_slots,time_slot_id', // Fixed
             'status_id' => 'required|exists:status,status_id',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|date_format:H:i',
             'duration_minutes' => 'required|integer|min:1',
             'purpose_notes' => 'required|string|max:500',
-            'reference_no' => 'required|string|unique:appointments,reference_no'
         ]);
 
         $appointment = Appointment::create($validated);

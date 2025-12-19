@@ -13,14 +13,13 @@ return new class extends Migration {
             // Foreign keys
             $table->unsignedBigInteger('resident_id');
             $table->foreignId('service_id')->references('service_id')->on('services')->onDelete('cascade');
-            $table->foreignId('timeslot_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');
+            $table->foreignId('timeslot_id')->references('timeslot_id')->on('time_slots')->onDelete('cascade');
             $table->foreignId('status_id')->references('status_id')->on('status')->onDelete('cascade');
 
             // Appointment details
             $table->date('appointment_date');
             $table->time('appointment_time');
-            $table->integer('duration_minutes');
-            $table->text('purpose_notes');
+            $table->text('purpose_notes')->nullable();;
             $table->string('reference_no')->unique();
 
             $table->timestamps();

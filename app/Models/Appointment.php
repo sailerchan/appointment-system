@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use App\Models\Status;
+use App\Models\TimeSlot;
 
 class Appointment extends Model
 {
@@ -18,7 +21,6 @@ class Appointment extends Model
         'status_id',
         'appointment_date',
         'appointment_time',
-        'duration_minutes',
         'purpose_notes',
     ];
 
@@ -30,6 +32,17 @@ class Appointment extends Model
             } while (self::where('reference_no', $reference)->exists()); // Check for collision
 
             $model->reference_no = $reference;
+
+            $pendingStatus = Status::where('status_name', 'Pending')->first();
+            $model->status()->associate($pendingStatus);
+
+            $timeslot = TimeSlot::lockForUpdate()->find($model->timeslot_id);
+
+            if (!$timeslot || $timeslot->available_slots <= 0) {
+                throw new \Exception('Selected timeslot is fully booked.');
+            }
+
+            $timeslot->decrement('available_slots');
         });
     }
 

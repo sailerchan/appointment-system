@@ -14,8 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Get IDs from previously seeded data
-        $adminRole = Role::where('role_name', 'Administrator')->first();
-        $residentRole = Role::where('role_name', 'Resident')->first();
+        $adminRole = Role::where('role_name', 'admin staff')->first();
 
         $activeStatus = Status::where('status_name', 'Active')
                               ->where('status_type', 'user')
@@ -67,49 +66,7 @@ class UserSeeder extends Seeder
                 'position_id' => $treasurerPosition ? $treasurerPosition->position_id : 4,
                 'status_id' => $activeStatus ? $activeStatus->status_id : 1,
                 'last_login_at' => now()->subDays(3),
-            ],
-
-            // Resident users
-            [
-                'email' => 'john.doe1@email.com',
-                'password_hash' => Hash::make('resident123'),
-                'full_name' => 'John Doe',
-                'phone_number' => '09123456783',
-                'role_id' => $residentRole ? $residentRole->role_id : 5,
-                'position_id' => $clerkPosition ? $clerkPosition->position_id : 3,
-                'status_id' => $activeStatus ? $activeStatus->status_id : 1,
-                'last_login_at' => now()->subDays(4),
-            ],
-            [
-                'email' => 'sarah.smith1@email.com',
-                'password_hash' => Hash::make('resident123'),
-                'full_name' => 'Sarah Smith',
-                'phone_number' => '09123456784',
-                'role_id' => $residentRole ? $residentRole->role_id : 5,
-                'position_id' => $clerkPosition ? $clerkPosition->position_id : 3,
-                'status_id' => $activeStatus ? $activeStatus->status_id : 1,
-                'last_login_at' => now()->subDays(5),
-            ],
-            [
-                'email' => 'michael.tan@email.com',
-                'password_hash' => Hash::make('resident123'),
-                'full_name' => 'Michael Tan',
-                'phone_number' => '09123456785',
-                'role_id' => $residentRole ? $residentRole->role_id : 5,
-                'position_id' => $clerkPosition ? $clerkPosition->position_id : 3,
-                'status_id' => $activeStatus ? $activeStatus->status_id : 1,
-                'last_login_at' => now()->subDays(6),
-            ],
-            [
-                'email' => 'liza.gonzales@email.com',
-                'password_hash' => Hash::make('resident123'),
-                'full_name' => 'Liza Gonzales',
-                'phone_number' => '09123456786',
-                'role_id' => $residentRole ? $residentRole->role_id : 5,
-                'position_id' => $clerkPosition ? $clerkPosition->position_id : 3,
-                'status_id' => $activeStatus ? $activeStatus->status_id : 1,
-                'last_login_at' => now()->subDays(7),
-            ],
+            ]
         ];
 
         $created = 0;

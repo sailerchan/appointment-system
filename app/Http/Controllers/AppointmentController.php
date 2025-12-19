@@ -31,11 +31,10 @@ class AppointmentController extends Controller
             'resident_id' => 'required|exists:residents,resident_id',
             'service_id' => 'required|exists:services,service_id',
             'timeslot_id' => 'required|exists:time_slots,timeslot_id',
-            'status_id' => 'required|exists:status,status_id',
+            'status_id' => 'nullable||exists:status,status_id',
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|date_format:H:i',
-            'duration_minutes' => 'required|integer|min:1',
-            'purpose_notes' => 'required|string|max:500',
+            'purpose_notes' => 'sometimes|nullable|string|max:500',
         ]);
 
         $appointment = Appointment::create($validated);
@@ -43,7 +42,7 @@ class AppointmentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Appointment created successfully',
-            'data' => $appointment->load(['resident', 'service', 'role', 'timeSlot', 'status'])
+            'data' => $appointment->load(['resident', 'service', 'timeSlot', 'status'])
         ], 201);
     }
 

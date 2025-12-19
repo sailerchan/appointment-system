@@ -26,7 +26,7 @@ class TimeSlotController extends Controller
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
             'max_capacity' => 'required|integer|min:1',
-            'available_slots' => 'required|integer|min:0'
+            'available_slots' => 'required|integer|min:0|lte:max_capacity',
         ]);
 
         $timeSlot = TimeSlot::create($validated);
@@ -74,17 +74,18 @@ class TimeSlotController extends Controller
             'message' => 'Time slot deleted successfully'
         ]);
     }
-    public function getAvailableSlots(): JsonResponse
-{
-    $availableSlots = TimeSlot::where('available_slots', '>', 0)
-        ->where('slot_date', '>=', now()->toDateString()) // Future slots only
-        ->orderBy('slot_date')
-        ->orderBy('start_time')
-        ->get();
 
-    return response()->json([
-        'success' => true,
-        'data' => $availableSlots
-    ]);
-}
+    public function getAvailableSlots(): JsonResponse
+    {
+        $availableSlots = TimeSlot::where('available_slots', '>', 0)
+            ->where('slot_date', '>=', now()->toDateString()) // Future slots only
+            ->orderBy('slot_date')
+            ->orderBy('start_time')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $availableSlots
+        ]);
+    }
 }
