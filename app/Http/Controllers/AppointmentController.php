@@ -36,7 +36,6 @@ class AppointmentController extends Controller
             'appointment_time' => 'required|date_format:H:i',
             'duration_minutes' => 'required|integer|min:1',
             'purpose_notes' => 'required|string|max:500',
-            'reference_no' => 'required|string|unique:appointments,reference_no'
         ]);
 
         $appointment = Appointment::create($validated);
@@ -69,7 +68,6 @@ class AppointmentController extends Controller
             'appointment_time' => 'sometimes|date_format:H:i',
             'duration_minutes' => 'sometimes|integer|min:1',
             'purpose_notes' => 'sometimes|string|max:500',
-            'reference_no' => 'sometimes|string|unique:appointments,reference_no,' . $appointment->appointment_id . ',appointment_id'
         ]);
 
         $appointment->update($validated);

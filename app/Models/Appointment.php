@@ -20,8 +20,18 @@ class Appointment extends Model
         'appointment_time',
         'duration_minutes',
         'purpose_notes',
-        'reference_no'
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            do {
+                $reference = 'REF-' . strtoupper(Str::random(8));
+            } while (self::where('reference_no', $reference)->exists()); // Check for collision
+
+            $model->reference_no = $reference;
+        });
+    }
 
     public function resident()
     {
