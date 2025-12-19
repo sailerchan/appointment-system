@@ -16,9 +16,6 @@ return new class extends Migration {
             $table->foreignId('timeslot_id')->references('timestop_id')->on('time_slots')->onDelete('cascade');
             $table->foreignId('status_id')->references('status_id')->on('status')->onDelete('cascade');
 
-            // REMOVED this line - you cannot reference the same table during creation
-            // $table->foreignId('appointment_id')->references('appointment_id')->on('appointments')->onDelete('cascade');
-
             // Appointment details
             $table->date('appointment_date');
             $table->time('appointment_time');

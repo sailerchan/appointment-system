@@ -14,7 +14,6 @@ class AppointmentController extends Controller
         $appointments = Appointment::with([
             'resident',
             'service',
-            // 'role',
             'timeSlot',
             'status'
         ])->get();
@@ -31,7 +30,6 @@ class AppointmentController extends Controller
         $validated = $request->validate([
             'resident_id' => 'required|exists:residents,resident_id',
             'service_id' => 'required|exists:services,service_id',
-            // 'role_id' => 'required|exists:roles,role_id',
             'timeslot_id' => 'required|exists:time_slots,timeslot_id',
             'status_id' => 'required|exists:status,status_id',
             'appointment_date' => 'required|date',
