@@ -14,8 +14,7 @@ class Appointment extends Model
     protected $fillable = [
         'resident_id',
         'service_id',
-        // 'role_id',          // ← CHANGE THIS LINE
-        'timeslot_id',      // ← CHANGE THIS LINE
+        'timeslot_id',
         'status_id',
         'appointment_date',
         'appointment_time',
@@ -26,7 +25,6 @@ class Appointment extends Model
 
     public function resident()
     {
-
         return $this->belongsTo(Resident::class, 'resident_id', 'resident_id');
     }
 
