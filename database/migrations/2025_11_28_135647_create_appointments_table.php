@@ -23,7 +23,6 @@ return new class extends Migration {
             $table->timestamps();
 
             // Optional: Add indexes
-            $table->index('appointment_date');
             $table->index('reference_no');
         });
     }

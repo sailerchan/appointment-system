@@ -61,9 +61,6 @@ class AppointmentController extends Controller
             'service_id' => 'sometimes|exists:services,service_id',
             'timeslot_id' => 'sometimes|exists:time_slots,timestop_id', // ⚠️ FIXED
             'status_id' => 'sometimes|exists:status,status_id',
-            'appointment_date' => 'sometimes|date',
-            'appointment_time' => 'sometimes|date_format:H:i',
-            'duration_minutes' => 'sometimes|integer|min:1',
             'purpose_notes' => 'sometimes|string|max:500',
         ]);
 
